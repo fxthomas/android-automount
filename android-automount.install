@@ -1,0 +1,15 @@
+post_install() {
+  udevadm control --reload-rules
+  systemctl --system daemon-reload
+
+  /bin/cat << EOF
+==> If your device is not recognized automatically,
+==> use \`udevadm monitor --environment --udev\`
+==> to find out its product and vendor ID.
+EOF
+}
+
+post_upgrade() {
+  post_install
+}
+

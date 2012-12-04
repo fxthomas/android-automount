@@ -1,0 +1,6 @@
+# Android MTP mount service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/mtp mount %I
+ExecStop=/usr/bin/mtp unmount %I

@@ -1,0 +1,40 @@
+# Google Nexus 7 16 Gb Bootloader & recovery mode
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e40", MODE="0666" # Bootloader
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d001", MODE="0666" # Recovery
+
+# Google Nexus 7 16 Gb PTP mode (camera)
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e43", MODE="0666" # PTP media
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e44", MODE="0666" # PTP media with USB debug on
+
+# Google Nexus 7 16 Gb MTP mode (multimedia device)
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e41", MODE="0666" # MTP media
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e42", MODE="0666" # MTP media with USB debug on
+
+# Galaxy Nexus
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666"
+
+###################################
+# Android devices, when unplugged #
+###################################
+
+# Nexus 7
+ENV{ID_MODEL_ID}=="4e41", ENV{ID_VENDOR_ID}=="18d1", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e41", ENV{ID_VENDOR_ID}=="18d1", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+
+# Galaxy Nexus
+ENV{ID_MODEL_ID}=="6860", ENV{ID_VENDOR_ID}=="04e8", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+
+####################################
+# Android devices, when plugged-in #
+####################################
+
+# Nexus 7
+ENV{ID_MODEL_ID}=="4e41", ENV{ID_VENDOR_ID}=="18d1", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e41", ENV{ID_VENDOR_ID}=="18d1", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
+ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
+
+# Galaxy Nexus
+ENV{ID_MODEL_ID}=="6860", ENV{ID_VENDOR_ID}=="04e8", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Base Script File (android-mtp.sh)
+# Created: Tue 04 Dec 2012 06:44:50 PM CET
+# Version: 1.0
+# Author: François-Xavier Thomas <fx.thomas@gmail.com>
+#
+# This Bash script was developped by François-Xavier Thomas.
+# You are free to copy, adapt or modify it.
+# If you do so, however, leave my name somewhere in the credits, I'd appreciate it ;)
+
+GO_MTPFS=/usr/bin/go-mtpfs
+DEVICE_NAME=${2//_/ }
+
+case $1 in
+  start|mount)
+    echo "Mounting MTP device on /media/$DEVICE_NAME"
+    /bin/mkdir -p "/media/$DEVICE_NAME"
+    /usr/sbin/daemonize -l /var/lock/go-mtpfs.$2.lock /usr/bin/go-mtpfs -allow-other=true "/media/$DEVICE_NAME"
+    ;;
+  stop|unmount)
+    echo "Unmounting MTP device on /media/$DEVICE_NAME"
+    /bin/umount "/media/$DEVICE_NAME"
+    /bin/rmdir "/media/$DEVICE_NAME"
+    ;;
+  *)
+    echo "Usage: android-mtp start device-name"
+    ;;
+esac
