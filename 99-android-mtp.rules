@@ -13,6 +13,9 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4e42", MODE="0666" #
 # Galaxy Nexus
 SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666"
 
+# HP Touchpad 32GB (HTC (High Tech Computer Corp.))
+SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", ATTR{idProduct}=="685c", MODE="0666"
+
 ###################################
 # Android devices, when unplugged #
 ###################################
@@ -26,6 +29,9 @@ ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="remove", RUN+="/us
 # Galaxy Nexus
 ENV{ID_MODEL_ID}=="6860", ENV{ID_VENDOR_ID}=="04e8", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
 
+# HP Touchpad 32GB (HTC (High Tech Computer Corp.))
+ENV{ID_MODEL_ID}=="685c", ENV{ID_VENDOR_ID}=="0bb4", ACTION=="remove", RUN+="/usr/bin/systemctl stop 'android-mtp@$env{ID_MODEL}.service'"
+
 ####################################
 # Android devices, when plugged-in #
 ####################################
@@ -38,3 +44,6 @@ ENV{ID_MODEL_ID}=="4e42", ENV{ID_VENDOR_ID}=="18d1", ACTION=="add", RUN+="/usr/b
 
 # Galaxy Nexus
 ENV{ID_MODEL_ID}=="6860", ENV{ID_VENDOR_ID}=="04e8", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
+
+# HP Touchpad 32GB (HTC (High Tech Computer Corp.))
+ENV{ID_MODEL_ID}=="685c", ENV{ID_VENDOR_ID}=="0bb4", ACTION=="add", RUN+="/usr/bin/systemctl start 'android-mtp@$env{ID_MODEL}.service'"
